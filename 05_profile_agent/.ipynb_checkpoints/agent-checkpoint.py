@@ -12,6 +12,7 @@ root_agent = LlmAgent(
     name="profile_planner",
     model="gemini-2.5-flash",
     # REPLACE ME: Add tools to root agent
+    tools=[save_tool, recall_tool],
     instruction="""
     You are a hyper-personalized Master Trip Planner.
     1. RECALL FIRST: Before planning, your first action MUST be to call `recall_user_preferences` to learn about the user.
