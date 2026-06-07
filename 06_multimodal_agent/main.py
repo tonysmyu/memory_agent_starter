@@ -143,7 +143,12 @@ agent_engine_id = agent_engine.api_resource.name.split("/")[-1]
 print(f"Agent Engine ID: {agent_engine_id}")
 
 # TODO create session service and memory service
-
+session_service = VertexAiSessionService(
+    project=PROJECT_ID, location=LOCATION, agent_engine_id=agent_engine_id
+)
+memory_service = VertexAiMemoryBankService(
+    project=PROJECT_ID, location=LOCATION, agent_engine_id=agent_engine_id
+)
 
 APP_NAME = root_agent.name
 runner = Runner(
@@ -230,12 +235,7 @@ async def test_trip_planner():
         app_name=APP_NAME, user_id=USER_ID, session_id=session.id
     )
     # TODO: create memory from session
-    session_service = VertexAiSessionService(
-    project=PROJECT_ID, location=LOCATION, agent_engine_id=agent_engine_id
-    )
-    memory_service = VertexAiMemoryBankService(
-    project=PROJECT_ID, location=LOCATION, agent_engine_id=agent_engine_id
-    )
+    await memory_service.add_session_to_memory(final_session_state)
 
     print("✅ Full conversation context (Image, Video, Audio) saved to Memory Bank.")
     print("---------------------------------------------------")

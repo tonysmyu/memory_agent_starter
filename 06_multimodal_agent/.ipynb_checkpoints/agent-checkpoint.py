@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from google.adk.agents import LlmAgent
 # REPLACE ME: add imports
-from google.adk.memory import PreloadMemoryTool
+from google.adk.tools.preload_memory_tool import PreloadMemoryTool
 
 try:
     from .tools import budget_tool
